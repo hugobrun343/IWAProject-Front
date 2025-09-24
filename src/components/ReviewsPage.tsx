@@ -79,9 +79,9 @@ export function ReviewsPage({ onBack }: ReviewsPageProps) {
         <View style={styles.reviewHeader}>
           <View style={styles.reviewerInfo}>
             <ImageWithFallback
-              source={{ uri: review.reviewerAvatar }}
+              src={review.reviewerAvatar}
               style={styles.avatar}
-              fallbackText={review.reviewer.split(' ').map((n: string) => n[0]).join('')}
+              alt={review.reviewer}
             />
             <View style={styles.reviewerDetails}>
               <View style={styles.nameRow}>
@@ -136,9 +136,9 @@ export function ReviewsPage({ onBack }: ReviewsPageProps) {
         <View style={styles.reviewHeader}>
           <View style={styles.reviewerInfo}>
             <ImageWithFallback
-              source={{ uri: review.revieweeAvatar }}
+              src={review.revieweeAvatar}
               style={styles.avatar}
-              fallbackText={review.reviewee.split(' ').map((n: string) => n[0]).join('')}
+              alt={review.reviewee}
             />
             <View style={styles.reviewerDetails}>
               <Text style={styles.reviewerName}>{review.reviewee}</Text>

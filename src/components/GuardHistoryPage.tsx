@@ -129,9 +129,9 @@ export function GuardHistoryPage({ onBack }: GuardHistoryPageProps) {
           <View style={styles.ownerInfo}>
             <View style={styles.avatar}>
               <ImageWithFallback 
-                source={{ uri: guard.ownerAvatar }} 
+                src={guard.ownerAvatar} 
                 style={styles.avatarImage}
-                fallback={<Icon name="User" size={24} color={theme.colors.mutedForeground} />}
+                alt={guard.owner}
               />
             </View>
             <View style={styles.guardInfo}>
@@ -214,9 +214,9 @@ export function GuardHistoryPage({ onBack }: GuardHistoryPageProps) {
           <View style={styles.ownerInfo}>
             <View style={styles.avatar}>
               <ImageWithFallback 
-                source={{ uri: guard.ownerAvatar }} 
+                src={guard.ownerAvatar} 
                 style={styles.avatarImage}
-                fallback={<Icon name="User" size={24} color={theme.colors.mutedForeground} />}
+                alt={guard.owner}
               />
             </View>
             <View style={styles.guardInfo}>
@@ -277,15 +277,15 @@ export function GuardHistoryPage({ onBack }: GuardHistoryPageProps) {
   );
 
   const CurrentGuardCard = ({ guard }: { guard: any }) => (
-    <Card style={[styles.guardCard, styles.currentGuardCard]}>
+    <Card style={StyleSheet.flatten([styles.guardCard, styles.currentGuardCard])}>
       <CardContent>
         <View style={styles.cardHeader}>
           <View style={styles.ownerInfo}>
             <View style={styles.avatar}>
               <ImageWithFallback 
-                source={{ uri: guard.ownerAvatar }} 
+                src={guard.ownerAvatar} 
                 style={styles.avatarImage}
-                fallback={<Icon name="User" size={24} color={theme.colors.mutedForeground} />}
+                alt={guard.owner}
               />
             </View>
             <View style={styles.guardInfo}>

@@ -70,9 +70,9 @@ export function EditProfilePage({ onBack }: EditProfilePageProps) {
           <CardContent style={styles.photoContent}>
             <View style={styles.photoSection}>
               <ImageWithFallback
-                source={{ uri: profile.avatar }}
+                src={profile.avatar}
                 style={styles.profilePhoto}
-                fallbackText={`${profile.firstName[0]}${profile.lastName[0]}`}
+                alt={`${profile.firstName} ${profile.lastName}`}
               />
               <View style={styles.photoActions}>
                 <Button variant="outline" size="sm" style={styles.photoButton}>

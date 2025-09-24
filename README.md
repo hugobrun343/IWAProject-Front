@@ -1,161 +1,236 @@
-# GuardHome React Native
+# IWAProject-Front
 
-Une application mobile React Native pour la garde d'animaux et de domiciles, convertie depuis le projet React original.
+## 📱 Frontend Mobile - Application de Garde d'Animaux
 
-## 📱 Fonctionnalités
+**Partie Front du Projet IWA de la spécialisation DAMS5 à Polytech Montpellier**
 
-- **Recherche d'annonces** : Interface de recherche avec filtres et géolocalisation
-- **Navigation par onglets** : Navigation fluide entre les différentes sections
-- **Gestion des favoris** : Sauvegarde des annonces préférées
-- **Profil utilisateur** : Gestion complète du profil et des paramètres
-- **Messages** : Interface de messagerie (préparé pour l'intégration)
-- **Création d'annonces** : Interface pour publier de nouvelles demandes de garde
+---
 
-## 🚀 Installation
+## 🎯 Description du Projet
 
-### Prérequis
+IWAProject-Front est une application mobile React Native développée dans le cadre du projet IWA (Innovation Web Application) de la spécialisation DAMS5 (Développement d'Applications Mobiles et Systèmes) à Polytech Montpellier.
 
-- Node.js (v18 ou supérieur)
-- npm ou yarn
-- Expo CLI : `npm install -g @expo/cli`
-- Un émulateur iOS/Android ou l'app Expo Go sur votre téléphone
+Cette application permet aux utilisateurs de :
+- 🔍 Rechercher des services de garde d'animaux
+- 💖 Ajouter des annonces en favoris
+- 📝 Créer et gérer leurs propres annonces
+- 💬 Communiquer avec les propriétaires
+- 👤 Gérer leur profil et leurs abonnements
 
-### Étapes d'installation
+---
 
-1. **Cloner et naviguer vers le projet**
-   ```bash
-   cd GuardHomeReactNative
-   ```
+## 🛠️ Technologies Utilisées
 
-2. **Installer les dépendances**
-   ```bash
-   npm install
-   ```
+- **React Native** - Framework de développement mobile
+- **Expo** - Plateforme de développement et déploiement
+- **TypeScript** - Langage de programmation typé
+- **React Navigation** - Navigation entre les écrans
+- **Expo Vector Icons** - Bibliothèque d'icônes
+- **React Native Paper** - Composants UI Material Design
 
-3. **Démarrer le projet**
-   ```bash
-   npm start
-   # ou
-   expo start
-   ```
+---
 
-4. **Lancer sur un appareil**
-   - **iOS** : Appuyez sur `i` dans le terminal ou scannez le QR code avec l'app Camera
-   - **Android** : Appuyez sur `a` dans le terminal ou scannez le QR code avec l'app Expo Go
-   - **Web** : Appuyez sur `w` dans le terminal
-
-## 🏗️ Structure du projet
+## 📁 Structure du Projet
 
 ```
 src/
-├── components/           # Composants de l'application
-│   ├── ui/              # Composants UI réutilisables
-│   │   ├── Button.tsx   # Composant bouton
-│   │   ├── Card.tsx     # Composants de carte
-│   │   ├── Input.tsx    # Composant input
-│   │   ├── Badge.tsx    # Composant badge
-│   │   ├── Icon.tsx     # Gestion des icônes
-│   │   └── ImageWithFallback.tsx # Composant image avec fallback
-│   ├── BottomNavigation.tsx      # Navigation par onglets
-│   ├── SearchHeader.tsx          # En-tête de recherche
-│   ├── ListingsGrid.tsx          # Grille des annonces
-│   ├── ListingCard.tsx           # Carte d'annonce
-│   ├── ListingDetailPage.tsx     # Page de détail d'annonce
-│   ├── ProfilePage.tsx           # Page de profil
-│   ├── FavoritesPage.tsx         # Page des favoris
-│   ├── MessagesPage.tsx          # Page des messages
-│   ├── CreateListingPage.tsx     # Page de création d'annonce
-│   └── ...                       # Autres pages
-└── styles/
-    └── theme.ts         # Thème et constantes de style
+├── components/           # Composants réutilisables
+│   ├── ui/              # Composants UI de base
+│   ├── BottomNavigation.tsx
+│   ├── SearchHeader.tsx
+│   ├── ListingCard.tsx
+│   ├── ListingsGrid.tsx
+│   ├── ListingDetailPage.tsx
+│   ├── ProfilePage.tsx
+│   ├── FavoritesPage.tsx
+│   ├── MessagesPage.tsx
+│   ├── CreateListingPage.tsx
+│   ├── MyListingsPage.tsx
+│   ├── GuardHistoryPage.tsx
+│   ├── ReviewsPage.tsx
+│   ├── SubscriptionPage.tsx
+│   ├── PaymentsPage.tsx
+│   └── EditProfilePage.tsx
+├── styles/              # Styles globaux
+└── main.tsx            # Point d'entrée de l'application
 ```
 
-## 🎨 Design System
+---
 
-Le projet utilise un système de design cohérent avec :
+## 🚀 Installation et Lancement
 
-- **Couleurs** : Palette de couleurs identique au projet React original
-- **Typographie** : Tailles et poids de police standardisés
-- **Espacement** : Système d'espacement cohérent
-- **Composants** : Composants UI réutilisables avec variants
+### Prérequis
+- Node.js (version 18 ou supérieure)
+- npm ou yarn
+- Expo CLI
+- Un émulateur mobile ou un appareil physique
 
-### Couleurs principales
+### Installation
+```bash
+# Cloner le repository
+git clone <repository-url>
+cd IWAProject-Front
 
-- **Primary** : #4FB286 (Vert principal)
-- **Secondary** : #CEB5A7 (Beige secondaire)
-- **Background** : #FFFFFF (Blanc)
-- **Foreground** : #263D42 (Gris foncé)
+# Installer les dépendances
+npm install
 
-## 🔧 Technologies utilisées
+# Lancer l'application
+npm start
+```
 
-- **React Native** : Framework mobile
-- **Expo** : Plateforme de développement
-- **TypeScript** : Typage statique
-- **Expo Vector Icons** : Icônes
-- **Expo Image** : Gestion optimisée des images
-- **React Native Safe Area Context** : Gestion des zones sécurisées
+### Commandes disponibles
+```bash
+npm start          # Démarrer le serveur de développement
+npm run android    # Lancer sur Android
+npm run ios        # Lancer sur iOS
+npm run web        # Lancer sur le web
+```
 
-## 📦 Scripts disponibles
+---
 
-- `npm start` : Démarre le serveur de développement Expo
-- `npm run android` : Lance l'application sur Android
-- `npm run ios` : Lance l'application sur iOS
-- `npm run web` : Lance l'application sur le web
+## 📱 Fonctionnalités Principales
 
-## 🔄 Différences avec le projet React
+### 🏠 Page d'Accueil
+- Recherche d'annonces avec filtres
+- Affichage des annonces populaires
+- Navigation vers les détails
 
-### Adaptations React Native
+### ❤️ Favoris
+- Liste des annonces favorites
+- Gestion des favoris
 
-1. **Styling** : Remplacement de Tailwind CSS par StyleSheet
-2. **Navigation** : Utilisation de la navigation native au lieu du DOM
-3. **Icônes** : Remplacement de Lucide React par Expo Vector Icons
-4. **Images** : Utilisation d'Expo Image pour les performances
-5. **Composants** : Adaptation des composants HTML vers React Native
+### ➕ Création d'Annonce
+- Formulaire de création d'annonce
+- Upload de photos
+- Configuration des préférences
 
-### Fonctionnalités conservées
+### 💬 Messages
+- Interface de messagerie
+- Conversations avec les propriétaires
+- Recherche de conversations
 
-- ✅ Interface utilisateur identique
-- ✅ Navigation par onglets
-- ✅ Système de favoris
-- ✅ Pages de profil et paramètres
-- ✅ Design responsive
-- ✅ Thème de couleurs cohérent
+### 👤 Profil
+- Gestion du profil utilisateur
+- Historique des gardes
+- Avis et évaluations
+- Abonnements et paiements
 
-## 🚧 Fonctionnalités à implémenter
+---
 
-- [ ] Intégration API réelle
-- [ ] Système de messagerie fonctionnel
-- [ ] Géolocalisation réelle
-- [ ] Notifications push
-- [ ] Système de paiement
-- [ ] Upload d'images
-- [ ] Authentification utilisateur
+## 🎨 Design et UX
+
+L'application suit les principes du Material Design avec :
+- Interface intuitive et moderne
+- Navigation fluide entre les écrans
+- Composants réutilisables et cohérents
+- Thème personnalisable
+- Support des modes sombre/clair
+
+---
+
+## 🔧 Configuration
+
+### Variables d'environnement
+Créer un fichier `.env` à la racine du projet :
+```
+EXPO_PUBLIC_API_URL=your_api_url
+EXPO_PUBLIC_APP_NAME=IWAProject
+```
+
+### Configuration Expo
+Le fichier `app.json` contient la configuration Expo :
+- Nom de l'application
+- Version
+- Icônes et splash screen
+- Permissions
+
+---
+
+## 📚 Documentation
+
+### Composants UI
+Les composants UI sont documentés dans le dossier `src/components/ui/` :
+- `Button` - Boutons personnalisés
+- `Card` - Cartes d'affichage
+- `Input` - Champs de saisie
+- `Badge` - Badges et étiquettes
+- `Icon` - Icônes vectorielles
+- `ImageWithFallback` - Images avec fallback
+
+### Navigation
+L'application utilise React Navigation avec :
+- Bottom Tab Navigation pour les écrans principaux
+- Stack Navigation pour les écrans secondaires
+- Navigation conditionnelle basée sur l'état de l'utilisateur
+
+---
+
+## 🧪 Tests
+
+```bash
+# Lancer les tests
+npm test
+
+# Tests avec couverture
+npm run test:coverage
+```
+
+---
+
+## 📦 Déploiement
+
+### Build de production
+```bash
+# Build pour Android
+expo build:android
+
+# Build pour iOS
+expo build:ios
+```
+
+### Publication sur les stores
+```bash
+# Publier sur Google Play
+expo upload:android
+
+# Publier sur App Store
+expo upload:ios
+```
+
+---
+
+## 👥 Équipe de Développement
+
+**Spécialisation DAMS5 - Polytech Montpellier**
+- Développement dans le cadre du projet IWA
+- Encadrement par l'équipe pédagogique de Polytech Montpellier
+
+---
+
+## 📄 Licence
+
+Ce projet est développé dans le cadre académique de la spécialisation DAMS5 à Polytech Montpellier.
+
+---
 
 ## 🤝 Contribution
 
-1. Fork le projet
-2. Créez votre branche de fonctionnalité (`git checkout -b feature/AmazingFeature`)
-3. Committez vos changements (`git commit -m 'Add some AmazingFeature'`)
-4. Push vers la branche (`git push origin feature/AmazingFeature`)
-5. Ouvrez une Pull Request
+Pour contribuer au projet :
+1. Fork le repository
+2. Créer une branche feature (`git checkout -b feature/nouvelle-fonctionnalite`)
+3. Commit vos changements (`git commit -am 'Ajout d'une nouvelle fonctionnalité'`)
+4. Push vers la branche (`git push origin feature/nouvelle-fonctionnalite`)
+5. Créer une Pull Request
 
-## 📄 License
+---
 
-Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
+## 📞 Support
 
-## 🆘 Support
+Pour toute question ou problème :
+- Créer une issue sur GitHub
+- Contacter l'équipe de développement
+- Consulter la documentation Expo
 
-Si vous rencontrez des problèmes :
+---
 
-1. Vérifiez que toutes les dépendances sont installées
-2. Redémarrez le serveur Expo
-3. Nettoyez le cache : `expo start -c`
-4. Vérifiez les logs dans la console
-
-## 📱 Captures d'écran
-
-L'application reproduit fidèlement le design du projet React original avec :
-- Interface de recherche intuitive
-- Navigation fluide
-- Design moderne et épuré
-- Expérience utilisateur optimisée pour mobile
+**Développé avec ❤️ par l'équipe DAMS5 de Polytech Montpellier**

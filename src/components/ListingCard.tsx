@@ -41,9 +41,9 @@ export function ListingCard({
     <Card style={styles.card}>
       <View style={styles.imageContainer}>
         <ImageWithFallback
-          source={{ uri: imageUrl }}
+          src={imageUrl}
           style={styles.image}
-          fallbackText={title.substring(0, 2)}
+          alt={title}
         />
         <View style={styles.tagsContainer}>
           {tags.slice(0, 2).map((tag, index) => (
