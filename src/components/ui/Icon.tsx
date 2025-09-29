@@ -56,7 +56,10 @@ const iconMap = {
   'ellipsis-vertical': 'ellipsis-vertical',
   star: 'star',
   'options-outline': 'options-outline',
-  share: 'share-outline',
+  // Icônes pour l'authentification
+  'log-in': 'log-in-outline',
+  'log-out': 'log-out-outline',
+  key: 'key-outline',
 } as const;
 
 export type IconName = keyof typeof iconMap;

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { View, Text, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { Button } from './src/components/ui/Button';
 import { Card, CardContent } from './src/components/ui/Card';
 import { Badge } from './src/components/ui/Badge';
@@ -19,6 +19,8 @@ import { ReviewsPage } from './src/components/ReviewsPage';
 import { SubscriptionPage } from './src/components/SubscriptionPage';
 import { PaymentsPage } from './src/components/PaymentsPage';
 import { EditProfilePage } from './src/components/EditProfilePage';
+import { LoginPage } from './src/components/LoginPage';
+import { AuthProvider, useAuth } from './src/contexts/AuthContext';
 import { theme } from './src/styles/theme';
 
 const mockListings = [
@@ -80,13 +82,38 @@ const mockListings = [
   },
 ];
 
-export default function App() {
+// Main App Component with Authentication
+function MainApp() {
+  const { isAuthenticated, isLoading, user } = useAuth();
   const [activeTab, setActiveTab] = useState("home");
   const [currentPage, setCurrentPage] = useState("home");
   const [selectedListing, setSelectedListing] = useState(null);
   const [listings, setListings] = useState(mockListings);
   const [filteredListings, setFilteredListings] = useState(mockListings);
   const [navigationStack, setNavigationStack] = useState(["home"]); // Stack pour navigation hiérarchique
+
+  // Show loading screen while checking authentication
+  if (isLoading) {
+    return (
+      <SafeAreaProvider>
+        <StatusBar style="dark" backgroundColor="#ffffff" />
+        <View style={styles.loadingContainer}>
+          <ActivityIndicator size="large" color={theme.colors.primary} />
+          <Text style={styles.loadingText}>Chargement...</Text>
+        </View>
+      </SafeAreaProvider>
+    );
+  }
+
+  // Show login page if not authenticated
+  if (!isAuthenticated) {
+    return (
+      <SafeAreaProvider>
+        <StatusBar style="dark" backgroundColor="#ffffff" />
+        <LoginPage />
+      </SafeAreaProvider>
+    );
+  }
 
   const toggleLike = (id: string) => {
     const updatedListings = listings.map(listing => 
@@ -247,6 +274,7 @@ export default function App() {
     }
   };
 
+  // Main app content - only shown when authenticated
   return (
     <SafeAreaProvider>
       <StatusBar style="dark" backgroundColor="#ffffff" />
@@ -313,6 +341,15 @@ export default function App() {
   );
 }
 
+// Root App Component with AuthProvider
+export default function App() {
+  return (
+    <AuthProvider>
+      <MainApp />
+    </AuthProvider>
+  );
+}
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -350,6 +387,17 @@ const styles = StyleSheet.create({
   tabLabel: {
     fontSize: theme.fontSize.xs,
     fontWeight: theme.fontWeight.medium,
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: theme.colors.background,
+    gap: theme.spacing.md,
+  },
+  loadingText: {
+    fontSize: theme.fontSize.base,
+    color: theme.colors.mutedForeground,
   },
   placeholderPage: {
     flex: 1,

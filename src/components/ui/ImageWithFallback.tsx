@@ -4,25 +4,25 @@ import { Icon } from './Icon';
 import { theme } from '../../styles/theme';
 
 interface ImageWithFallbackProps {
-  src: string;
-  alt?: string;
+  source: { uri: string };
   style?: ImageStyle;
+  fallbackIcon?: string;
 }
 
-export function ImageWithFallback({ src, alt, style }: ImageWithFallbackProps) {
+export function ImageWithFallback({ source, style, fallbackIcon = "Image" }: ImageWithFallbackProps) {
   const [didError, setDidError] = useState(false);
 
   if (didError) {
     return (
       <View style={[styles.fallback, style]}>
-        <Icon name="Image" size={32} color={theme.colors.mutedForeground} />
+        <Icon name={fallbackIcon as any} size={32} color={theme.colors.mutedForeground} />
       </View>
     );
   }
 
   return (
     <Image
-      source={{ uri: src }}
+      source={source}
       style={style}
       onError={() => setDidError(true)}
     />

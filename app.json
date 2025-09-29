@@ -29,6 +29,7 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
+    "scheme": "guardhomereactnative",
     "extra": {
       "eas": {
         "projectId": "a54aa430-6fb5-43a0-8191-5daa92d18343"

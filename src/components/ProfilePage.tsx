@@ -7,6 +7,8 @@ import { Badge } from './ui/Badge';
 import { Icon } from './ui/Icon';
 import { PageHeader } from './ui/PageHeader';
 import { Switch } from './ui/Switch';
+import { useAuth } from '../contexts/AuthContext';
+import { ImageWithFallback } from './ui/ImageWithFallback';
 import { theme } from '../styles/theme';
 
 interface ProfilePageProps {
@@ -14,6 +16,7 @@ interface ProfilePageProps {
 }
 
 export function ProfilePage({ onNavigate }: ProfilePageProps) {
+  const { user, logout } = useAuth();
   const [notificationsEnabled, setNotificationsEnabled] = React.useState(true);
   
   const userStats = {
@@ -65,8 +68,8 @@ export function ProfilePage({ onNavigate }: ProfilePageProps) {
     {
       icon: "ShieldCheckmark",
       label: "Vérification d'identité",
-      description: "Complétée le 15 jan 2024",
-      badge: "Vérifié"
+      description: user?.isVerified ? "Complétée" : "En attente de vérification",
+      badge: user?.isVerified ? "Vérifié" : "En attente"
     },
     {
       icon: "CreditCard",
@@ -90,21 +93,34 @@ export function ProfilePage({ onNavigate }: ProfilePageProps) {
 
           <View style={styles.profileInfo}>
             <View style={styles.avatar}>
-              <Icon name="User" size={32} color={theme.colors.mutedForeground} />
+              {user?.photo_profil ? (
+                <ImageWithFallback
+                  source={{ uri: user.photo_profil }}
+                  style={styles.avatarImage}
+                  fallbackIcon="User"
+                />
+              ) : (
+                <Icon name="User" size={32} color={theme.colors.mutedForeground} />
+              )}
             </View>
             <View style={styles.profileDetails}>
-              <Text style={styles.profileName}>Sophie Chen</Text>
-              <Text style={styles.memberSince}>Membre depuis janvier 2023</Text>
+              <Text style={styles.profileName}>{user?.fullName || user?.username || 'Utilisateur'}</Text>
+              <Text style={styles.profileEmail}>{user?.email}</Text>
+              <Text style={styles.memberSince}>
+                Membre depuis {user?.date_inscription ? new Date(user.date_inscription).toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' }) : 'janvier 2023'}
+              </Text>
               <View style={styles.profileMeta}>
                 <View style={styles.ratingContainer}>
                   <Icon name="Star" size={16} color="#fbbf24" />
                   <Text style={styles.ratingText}>{userStats.rating}</Text>
                   <Text style={styles.reviewCount}>({userStats.reviewCount} avis)</Text>
                 </View>
-                <Badge variant="secondary" style={styles.verifiedBadge}>
-                  <Icon name="ShieldCheckmark" size={12} color={theme.colors.secondaryForeground} />
-                  <Text style={styles.verifiedText}>Vérifiée</Text>
-                </Badge>
+                {user?.isVerified && (
+                  <Badge variant="secondary" style={styles.verifiedBadge}>
+                    <Icon name="ShieldCheckmark" size={12} color={theme.colors.secondaryForeground} />
+                    <Text style={styles.verifiedText}>Vérifiée</Text>
+                  </Badge>
+                )}
               </View>
             </View>
           </View>
@@ -276,7 +292,9 @@ export function ProfilePage({ onNavigate }: ProfilePageProps) {
               <Button 
                 variant="ghost" 
                 style={styles.logoutButton}
+                onPress={logout}
               >
+                <Icon name="log-out" size={20} color={theme.colors.destructive} />
                 <Text style={styles.logoutText}>Se déconnecter</Text>
               </Button>
             </CardContent>
@@ -349,6 +367,17 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.muted,
     alignItems: 'center',
     justifyContent: 'center',
+    overflow: 'hidden',
+  },
+  avatarImage: {
+    width: 64,
+    height: 64,
+    borderRadius: 32,
+  },
+  profileEmail: {
+    fontSize: theme.fontSize.sm,
+    color: theme.colors.mutedForeground,
+    marginBottom: theme.spacing.xs,
   },
   profileDetails: {
     flex: 1,
