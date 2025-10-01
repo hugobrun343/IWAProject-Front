@@ -43,9 +43,9 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 // Keycloak configuration
 const KEYCLOAK_CONFIG = {
   realm: 'Homeguard',
-  clientId: 'guardhome-mobile', // Use your mobile client ID
-  url: 'https://homeguard-keycloak.cluster-ig5.igpolytech.fr/realms/Homeguard/account',
-  redirectUri: 'exp://192.168.1.151:8081',
+  clientId: 'homeguard-mobile',
+  url: 'http://localhost:8080',
+  redirectUri: 'http://localhost:8081', // Pour les tests web
 };
 
 interface AuthProviderProps {
@@ -113,26 +113,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     try {
       setIsLoading(true);
 
-      // Generate code verifier and challenge for PKCE
-      const codeVerifier = Math.random().toString(36) + Date.now().toString(36);
-      
-      const codeChallenge = await Crypto.digestStringAsync(
-        Crypto.CryptoDigestAlgorithm.SHA256,
-        codeVerifier,
-        { encoding: Crypto.CryptoEncoding.BASE64 }
-      );
-
-      // Store code verifier for later use
-      await storeToken('code_verifier', codeVerifier);
-
-      // Build authorization URL with Google as preferred provider
+      // Simple authorization flow without PKCE for testing
       const authUrl = `${KEYCLOAK_CONFIG.url}/realms/${KEYCLOAK_CONFIG.realm}/protocol/openid-connect/auth?` +
         `client_id=${KEYCLOAK_CONFIG.clientId}&` +
         `redirect_uri=${encodeURIComponent(KEYCLOAK_CONFIG.redirectUri)}&` +
         `response_type=code&` +
         `scope=openid profile email&` +
-        `code_challenge=${codeChallenge}&` +
-        `code_challenge_method=S256&` +
         `kc_idp_hint=google`; // Pre-select Google login
 
       // Open browser for authentication
@@ -146,7 +132,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         const code = url.searchParams.get('code');
         
         if (code) {
-          await exchangeCodeForTokens(code, codeVerifier);
+          await exchangeCodeForTokens(code, ''); // No PKCE for now
         }
       }
     } catch (error) {
@@ -344,7 +330,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         `client_id=${KEYCLOAK_CONFIG.clientId}&` +
         `redirect_uri=${encodeURIComponent(KEYCLOAK_CONFIG.redirectUri)}`;
 
-      await WebBrowser.openAuthSessionAsync(logoutUrl, KEYCLOAK_CONFIG.redirectUri);
+      await WebBrowser.openAuthSessionAsync(
+        logoutUrl,
+        // KEYCLOAK_CONFIG.redirectUri
+      );
     } catch (error) {
       console.error('Logout error:', error);
     }

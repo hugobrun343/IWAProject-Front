@@ -1,8 +1,8 @@
 // Keycloak configuration
 export const KEYCLOAK_CONFIG = {
-  realm: 'master',
-  clientId: 'homeguard-frontend',
-  url: 'https://homeguard-keycloak.cluster-ig5.igpolytech.fr',
+  realm: 'Homeguard',
+  clientId: 'homeguard-mobile',
+  url: 'http://localhost:8080',
   
   // OAuth configuration
   redirectUri: 'guardhomereactnative://auth',
@@ -12,10 +12,10 @@ export const KEYCLOAK_CONFIG = {
   
   // API endpoints
   endpoints: {
-    auth: '/realms/master/protocol/openid-connect/auth',
-    token: '/realms/master/protocol/openid-connect/token',
-    logout: '/realms/master/protocol/openid-connect/logout',
-    userInfo: '/realms/master/protocol/openid-connect/userinfo',
+    auth: '/realms/Homeguard/protocol/openid-connect/auth',
+    token: '/realms/Homeguard/protocol/openid-connect/token',
+    logout: '/realms/Homeguard/protocol/openid-connect/logout',
+    userInfo: '/realms/Homeguard/protocol/openid-connect/userinfo',
   }
 };
 
